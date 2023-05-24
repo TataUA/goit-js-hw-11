@@ -18,21 +18,24 @@
           name="searchQuery"
           autocomplete="off"
           placeholder="Search images..."
-        />
-        <button class="btn-search" type="submit">
-          <svg class="btn-svg" width="24px" height="24px">
-            <use href="./images/symbol-defs.svg#icon-search"></use>
-          </svg>
-      </button>
+          />
+          <button class="btn-search" type="submit">
+            <svg class="btn-svg" width="24px" height="24px">
+             <use href="./images/symbol-defs.svg#icon-search"></use>
+            </svg>
+          </button>
         </div>
       </form>
     </header>
 
     <main>
+     <div class="container">
       <div class="gallery">
         <!-- Карточки изображений -->
       </div>
-      <button type="button" class="load-more">Load more</button>
+      <button type="button" class="load-more hidden" >Load more</button>
+      <p class="text-end-gallery hidden">&#9785; We're sorry, but you've reached the end of search results.</p>
+     </div>
     </main>
 
     <script src="./js/index.js" type="module"></script>
