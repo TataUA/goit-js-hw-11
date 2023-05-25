@@ -25,17 +25,19 @@ async function onSearchBtnClick(e) {
     results = await getImages(query, currentPage);
     currentHits = results.hits.length;        
 
-    if(results.totalHits === 0) {
+    if(query === "") {
         galleryEl.innerHTML = "";
-        loadMoreBtn.classList.add('hidden');
-        endGallery.classList.add('hidden');
+        Notify.failure('Please, write what you want to find...');
+        return;
+    } else if(results.totalHits === 0) {
+        galleryEl.innerHTML = "";
         Notify.failure('Sorry, there are no images matching your search query. Please try again.');
         return;
-    } else {  
-        galleryEl.innerHTML = "";        
-        createGallery(results.hits);
-        lightbox.refresh();
-        Notify.success(`Hooray! We found ${results.totalHits} images.`);
+    } else if(results.totalHits < 40) {
+        resultsLoad();
+        endGallery.classList.remove('hidden');
+    } else { 
+        resultsLoad(); 
         loadMoreBtn.classList.remove('hidden');
         endGallery.classList.add('hidden');
 
@@ -47,6 +49,13 @@ async function onSearchBtnClick(e) {
         });
     }                
 };
+
+function resultsLoad () {
+        galleryEl.innerHTML = "";        
+        createGallery(results.hits);
+        lightbox.refresh();
+        Notify.success(`Hooray! We found ${results.totalHits} images.`);
+}
 
 async function onLoadMoreBtnClick (e) {
     currentPage += 1;
@@ -63,6 +72,7 @@ async function onLoadMoreBtnClick (e) {
 
 let lightbox = new SimpleLightbox('.photo-card a', {
     captions: true,
+    captionsData: 'alt',
     captionDelay: 250,
   });
 
