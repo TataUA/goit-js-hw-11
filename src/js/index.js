@@ -31,6 +31,7 @@ async function onSearchBtnClick(e) {
         return;
     } else if(results.totalHits === 0) {
         galleryEl.innerHTML = "";
+        endGallery.classList.add('hidden');
         Notify.failure('Sorry, there are no images matching your search query. Please try again.');
         return;
     } else if(results.totalHits < 40) {
